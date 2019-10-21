@@ -227,5 +227,5 @@ while 1:
     print('gameover!')
     sleep(1)
 
-
+teste
 
