@@ -16,7 +16,7 @@ ve = 1; tx = 'Que ventania começou!'; tx1 = 'Tronco cortado.' ##NPC
 textx: int = 100; texty: int = 100; ##Cord Text Padrao
 font = pygame.font.SysFont(("Tahoma"), 11, bold=1)
 text = font.render('', 1, white)
-
+coco!
 ##Listas
 itens = []
 vida = ['♥','♥','♥']
