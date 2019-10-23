@@ -155,7 +155,7 @@ def monsters(img, topx, topy, rightx, righty, item):
     else:
         return pygame.image.load(monster[img + 2]).convert_alpha()
 
-while gameover != 1:
+while gameover == 0:
     ##Saida ##
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
@@ -242,10 +242,16 @@ while gameover != 1:
     item(25, 65, 36, 75, 'pedra', 'Voce achou uma pedra.')
 
     pygame.time.delay(10)
-while 1:
+
+while gameover == 1:
+    ##Saida ##
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT: sys.exit()
+    bg = pygame.image.load("bgover.jpg").convert()
     screen.blit(bg, (0,0)) ##Background
     pygame.display.set_caption("Sublime") ##Nome da Janela
     pygame.display.update() ##Atualiza a interface
     print('gameover!')
     pygame.time.delay(100)
+
 
