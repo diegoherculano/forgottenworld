@@ -2,10 +2,10 @@ import pygame
 
 pygame.init()
 screen = pygame.display.set_mode((640,480))
-personright = ['direita/direita0.png', 'direita/direita1.png', 'direita/direita2.png', 'direita/direita3.png', 'direita/direita4.png', 'direita/direita5.png', 'direita/direita6.png', 'direita/direita7.png', 'direita/direita8.png']
-persondown = ['frente/frente0.png', 'frente/frente1.png', 'frente/frente2.png', 'frente/frente3.png', 'frente/frente4.png', 'frente/frente5.png', 'frente/frente6.png', 'frente/frente7.png', 'frente/frente8.png']
-personleft = ['esquerda/esquerda0.png', 'esquerda/esquerda1.png', 'esquerda/esquerda2.png', 'esquerda/esquerda3.png', 'esquerda/esquerda4.png', 'esquerda/esquerda5.png', 'esquerda/esquerda6.png', 'esquerda/esquerda7.png', 'esquerda/esquerda8.png']
-personup = ['tras/tras0.png', 'tras/tras1.png', 'tras/tras2.png', 'tras/tras3.png', 'tras/tras4.png', 'tras/tras5.png', 'tras/tras6.png', 'tras/tras7.png', 'tras/tras8.png']
+personright = ['images\\direita\\direita0.png', 'images\\direita\\direita1.png', 'images\\direita\\direita2.png', 'images\\direita\\direita3.png', 'images\\direita\\direita4.png', 'images\\direita\\direita5.png', 'images\\direita\\direita6.png', 'images\\direita\\direita7.png', 'images\\direita\\direita8.png']
+persondown = ['images\\frente\\frente0.png', 'images\\frente\\frente1.png', 'images\\frente\\frente2.png', 'images\\frente\\frente3.png', 'images\\frente\\frente4.png', 'images\\frente\\frente5.png', 'images\\frente\\frente6.png', 'images\\frente\\frente7.png', 'images\\frente\\frente8.png']
+personleft = ['images\\esquerda\\esquerda0.png', 'images\\esquerda\\esquerda1.png', 'images\\esquerda\\esquerda2.png', 'images\\esquerda\\esquerda3.png', 'images\\esquerda\\esquerda4.png', 'images\\esquerda\\esquerda5.png', 'images\\esquerda\\esquerda6.png', 'images\\esquerda\\esquerda7.png', 'images\\esquerda\\esquerda8.png']
+personup = ['images\\tras\\tras0.png', 'images\\tras\\tras1.png', 'images\\tras\\tras2.png', 'images\\tras\\tras3.png', 'images\\tras\\tras4.png', 'images\\tras\\tras5.png', 'images\\tras\\tras6.png', 'images\\tras\\tras7.png', 'images\\tras\\tras8.png']
 loadbg = pygame.image.load('bg3.jpg').convert()
 loadperson = pygame.image.load(personright[0]).convert_alpha()
 personx = 70

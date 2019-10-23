@@ -24,23 +24,32 @@ titem = ', '.join(itens)
 tvida = ', '.join(vida)
 
 ### Imagens ###
-char = ["images\\charfrente.png","images\\charfrentemov1.png","images\\charfrentemov2.png",
-        "images\\charcosta.png", "images\\charcostamov1.png", "images\\charcostamov2.png",
-        "images\\chardir.png", "images\\chardirmov1.png", "images\\chardirmov2.png",
-        "images\\charesq.png", "images\\charesqmov1.png", "images\\charesqmov2.png",
-        "images\\charespada1.png", "images\\charespada2.png"]
+personright = ['images\\direita\\direita0.png', 'images\\direita\\direita1.png', 'images\\direita\\direita2.png', 'images\\direita\\direita3.png', 'images\\direita\\direita4.png', 'images\\direita\\direita5.png', 'images\\direita\\direita6.png', 'images\\direita\\direita7.png', 'images\\direita\\direita8.png']
+persondown = ['images\\frente\\frente0.png', 'images\\frente\\frente1.png', 'images\\frente\\frente2.png', 'images\\frente\\frente3.png', 'images\\frente\\frente4.png', 'images\\frente\\frente5.png', 'images\\frente\\frente6.png', 'images\\frente\\frente7.png', 'images\\frente\\frente8.png']
+personleft = ['images\\esquerda\\esquerda0.png', 'images\\esquerda\\esquerda1.png', 'images\\esquerda\\esquerda2.png', 'images\\esquerda\\esquerda3.png', 'images\\esquerda\\esquerda4.png', 'images\\esquerda\\esquerda5.png', 'images\\esquerda\\esquerda6.png', 'images\\esquerda\\esquerda7.png', 'images\\esquerda\\esquerda8.png']
+personup = ['images\\tras\\tras0.png', 'images\\tras\\tras1.png', 'images\\tras\\tras2.png', 'images\\tras\\tras3.png', 'images\\tras\\tras4.png', 'images\\tras\\tras5.png', 'images\\tras\\tras6.png', 'images\\tras\\tras7.png', 'images\\tras\\tras8.png']
 npc = ["images\\zelda.png"]
 monster = ["images\\skelfrente.png", "images\\skeltras.png", "images\\skeldead.png"]
 
 #Tela
 screen = pygame.display.set_mode(size)
 #Carregamento de PNGs
-person = pygame.image.load(char[0]).convert_alpha()
+person = pygame.image.load(persondown[0]).convert_alpha()
 npcsc1 = pygame.image.load(npc[0]).convert_alpha()
 bg = pygame.image.load("bg2.png").convert()
 
 #pygame.mouse.set_visible(0)
 
+## Funcao Andar ##
+andar = -1
+def walk():
+    global andar
+    andar += 1
+    if andar < 8:
+        return andar
+    else:
+        andar = 0
+        return andar
 ## FUNCAO AREA ##
 def area(topx, topy, rightx, righty):
     global x; global y;
@@ -172,20 +181,20 @@ while gameover != 1:
     ### GAMEPAD ###
     if pressed[pygame.K_DOWN]:
         y += 1
-        person = pygame.image.load(char[random.randint(1,2)]).convert_alpha() ##Animação andar
+        person = pygame.image.load(persondown[walk()]).convert_alpha() ##Animação andar
         text = font.render('', 1, white) ##Apaga texto
     if pressed[pygame.K_UP]:
         y -= 1
-        person = pygame.image.load(char[random.randint(4,5)]).convert_alpha() ##Animação andar
+        person = pygame.image.load(personup[walk()]).convert_alpha() ##Animação andar
     if pressed[pygame.K_RIGHT]:
         x += 1
-        person = pygame.image.load(char[random.randint(7, 8)]).convert_alpha() ##Animação andar
+        person = pygame.image.load(personright[walk()]).convert_alpha() ##Animação andar
         text = font.render('', 1, white) ##Apaga texto
     if pressed[pygame.K_LEFT]:
         x -= 1
-        person = pygame.image.load(char[random.randint(10, 11)]).convert_alpha() ##Animação andar
+        person = pygame.image.load(personleft[walk()]).convert_alpha() ##Animação andar
         text = font.render('', 1, white)  ##Apaga texto
-    sleep(0.1)
+    pygame.time.delay(100)
 
     #Padrão Travas Bordas
     if x < 0:
