@@ -41,6 +41,7 @@ npcsc1 = pygame.image.load(npc[0]).convert_alpha()
 bg = pygame.image.load("bg3.jpg").convert()
 bgmenu = pygame.image.load("images/bgmenu.png").convert()
 bgseta = pygame.image.load("images/bgseta.png").convert_alpha()
+bgsobre = pygame.image.load("images/bgsobre.png").convert()
 #pygame.mouse.set_visible(0)
 
 ## Funcao Andar ##
@@ -165,15 +166,19 @@ while tela == 0:
         #print(event)
     screen.blit(bgmenu, (0, 0))
     screen.blit(bgseta, pygame.rect.Rect(bgsetax, bgsetay, 0, 0))
-    if pygame.key.get_pressed()[pygame.K_DOWN]:
+    pressed = pygame.key.get_pressed()  ##Recebe as hotkeys apertadas
+    if pressed[pygame.K_DOWN]:
         bgsetay = 273
-    if pygame.key.get_pressed()[pygame.K_UP]:
+    if pressed[pygame.K_UP]:
         bgsetay = 241
-    if pygame.key.get_pressed()[pygame.K_RETURN]:
+        bgmenu = pygame.image.load("images/bgmenu.png").convert()
+        pygame.display.update()
+    if pressed[pygame.K_RETURN]:
         if bgsetay == 241:
             tela = 1
         if bgsetay == 273:
-            print('oi')
+            bgmenu = pygame.image.load("images/bgsobre.png").convert()
+            pygame.display.update()
     pygame.display.update()
     pygame.time.delay(100)
 
@@ -257,7 +262,7 @@ while tela == 1:
         sleep(0.1)
         tx = 'Muito obrigado pela semente.'
         tx1 = 'Tronco cortado...'
-    npc(114, 107, 156, 150, 100, 100, tx,'Seja bem vindo a Thanos!')
+    npc(114, 107, 156, 150, 100, 100, 'Você está no mundo Hades!','Que loucura, fale com alguém!')
     npc(50, 152, 86, 179, 48, 148, tx1)
     ##Items
     item(208, 151, 224, 178, 'semente', 'Voce achou uma semente.')
