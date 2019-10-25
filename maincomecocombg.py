@@ -10,6 +10,7 @@ red = (255,204,204)
 x = 70
 y = 250
 tela = 0
+pygame.display.set_caption("Forgotten World")
 
 ve = 1; tx = 'Que ventania começou!'; tx1 = 'Tronco cortado.' ##NPC
 ##Textos
@@ -41,7 +42,8 @@ npcsc1 = pygame.image.load(npc[0]).convert_alpha()
 bg = pygame.image.load("bg3.jpg").convert()
 bgmenu = pygame.image.load("images/bgmenu.png").convert()
 bgseta = pygame.image.load("images/bgseta.png").convert_alpha()
-bgsobre = pygame.image.load("images/bgsobre.png").convert()
+bghistoria = pygame.image.load("images/bghistoria.png").convert()
+imghistoria = pygame.image.load("images/historia.png").convert_alpha()
 #pygame.mouse.set_visible(0)
 
 ## Funcao Andar ##
@@ -175,14 +177,34 @@ while tela == 0:
         pygame.display.update()
     if pressed[pygame.K_RETURN]:
         if bgsetay == 241:
+            pygame.time.delay(100)
             tela = 1
         if bgsetay == 273:
             bgmenu = pygame.image.load("images/bgsobre.png").convert()
             pygame.display.update()
     pygame.display.update()
-    pygame.time.delay(100)
+    pygame.time.delay(50)
 
+historiax = 440
 while tela == 1:
+    ##Saida ##
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT: sys.exit()
+        #print(event)
+    screen.blit(bghistoria, (0,0))
+    screen.blit(imghistoria, pygame.rect.Rect(0,historiax,0,0))
+    pressed = pygame.key.get_pressed()  ##Recebe as hotkeys apertadas
+
+    if historiax == 0 and pressed[pygame.K_RETURN]:
+        tela = 2
+    elif historiax == 0 or pressed[pygame.K_RETURN]:
+        historiax = 0
+    else:
+        historiax -= 0.5
+    pygame.display.update()
+    pygame.time.delay(50)
+
+while tela == 2:
     ##Saida ##
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
