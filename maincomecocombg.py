@@ -9,15 +9,14 @@ white = (255,255,255)
 red = (255,204,204)
 x = 70
 y = 250
-tela = 0
+tela = 2
 pygame.display.set_caption("Forgotten World")
 
-ve = 1; tx = 'Que ventania começou!'; tx1 = 'Tronco cortado.' ##NPC
 ##Textos
-textx: int = 100; texty: int = 100; ##Cord Text Padrao
+textx = 100; texty = 100; ##Cord Text Padrao
 font = pygame.font.SysFont(("Tahoma"), 14, bold=1)
 text = font.render('', 1, white)
-textx2: int = 100; texty2: int = 100; ##Cord Text Padrao
+textx2 = 100; texty2 = 100; ##Cord Text Padrao
 text2 = font.render('', 1, white)
 
 ##Listas
@@ -31,7 +30,7 @@ personright = ['images/direita/direita0.png', 'images/direita/direita1.png', 'im
 persondown = ['images/frente/frente0.png', 'images/frente/frente1.png', 'images/frente/frente2.png', 'images/frente/frente3.png', 'images/frente/frente4.png', 'images/frente/frente5.png', 'images/frente/frente6.png', 'images/frente/frente7.png', 'images/frente/frente8.png']
 personleft = ['images/esquerda/esquerda0.png', 'images/esquerda/esquerda1.png', 'images/esquerda/esquerda2.png', 'images/esquerda/esquerda3.png', 'images/esquerda/esquerda4.png', 'images/esquerda/esquerda5.png', 'images/esquerda/esquerda6.png', 'images/esquerda/esquerda7.png', 'images/esquerda/esquerda8.png']
 personup = ['images/tras/tras0.png', 'images/tras/tras1.png', 'images/tras/tras2.png', 'images/tras/tras3.png', 'images/tras/tras4.png', 'images/tras/tras5.png', 'images/tras/tras6.png', 'images/tras/tras7.png', 'images/tras/tras8.png']
-npc = ["images/npc1.png"]
+npc = ["images/npc1.png","images/npc2.png"]
 monster = ["images/skelwarfrente.png", "images/skelwartras.png", "images/skelwardead.png"]
 
 #Tela
@@ -39,6 +38,7 @@ screen = pygame.display.set_mode(size)
 #Carregamento de PNGs
 person = pygame.image.load(persondown[0]).convert_alpha()
 npcsc1 = pygame.image.load(npc[0]).convert_alpha()
+npcsc2 = pygame.image.load(npc[1]).convert_alpha()
 bg = pygame.image.load("bg3.jpg").convert()
 bgmenu = pygame.image.load("images/bgmenu.png").convert()
 bgseta = pygame.image.load("images/bgseta.png").convert_alpha()
@@ -72,7 +72,7 @@ def area(topx, topy, rightx, righty):
 ## FUNCAO NPC ##
 def npc(topx, topy, rightx, righty, ttx, tty, texto, texto2=''):
     global x; global y; global text; global textx; global texty; global text2; global textx2; global texty2;
-    if x == (topx) and (topy) <= y <= (righty):
+    if x == (topx) and (topy) <= y <= (topy):
         x -= 1
     if y == (righty) and (topx) <= x <= (rightx):
         y += 1
@@ -102,7 +102,7 @@ def item(cordtopx, cordtopy, cordbackx, cordbacky, item, texto):
 
 def monsters(img, topx, topy, rightx, righty, item):
     global x; global person;
-    global y; global texty; global textx; global text; global gameover;
+    global y; global texty; global textx; global text; global gameover; global tela;
     global itens
     num = random.randint(0,100)
     if item not in itens:
@@ -116,6 +116,7 @@ def monsters(img, topx, topy, rightx, righty, item):
                     vida.remove('♥')
                 elif len(vida) == 1:
                     gameover = 1
+                    tela = -1
                 sleep(0.5)
                 y += 1
             if x == (rightx) and (topy) <= y <= (righty):
@@ -128,6 +129,7 @@ def monsters(img, topx, topy, rightx, righty, item):
                     vida.remove('♥')
                 elif len(vida) == 1:
                     gameover = 1
+                    tela = -1
                 sleep(0.5)
                 y -= 1
             return pygame.image.load(monster[img+1]).convert_alpha()
@@ -142,17 +144,17 @@ def monsters(img, topx, topy, rightx, righty, item):
                     vida.remove('♥')
                 elif len(vida) == 1:
                     gameover = 1
+                    tela = -1
                 sleep(0.5)
                 y += 1
             if x == (rightx) and (topy) <= y <= (righty):
                 x += 1
             if y == (topy) and (topx) <= x <= (rightx):
-                for i in range(0, 40):
-                    person = pygame.image.load(persondown[0]).convert_alpha()
-                    pygame.display.update()
+                person = pygame.image.load(persondown[0]).convert_alpha()
+                pygame.display.update()
                 y -= 1
                 itens.append(item)
-                sleep(1)
+                sleep(0.5)
                 return pygame.image.load(monster[img+2]).convert_alpha()
             else:
                 return pygame.image.load(monster[img]).convert_alpha()
@@ -214,15 +216,13 @@ while tela == 2:
     tvida = ' | '.join(vida)
     textitems = font.render('Itens: ' + titem, 1, white)
     textvida = font.render(' ' + tvida, 1, red)
-
-    ##Monstro
-    skel = monsters(0, 163, 68, 189, 100, 'osso')
-
+    skel = monsters(0, 454, 156, 507, 230, 'escudo') ##Monstro
 
     ##Chamada de Tela##
     screen.blit(bg, (0,0)) ##Background
-    screen.blit(skel, pygame.rect.Rect(177, 86, 0, 0))  ##MonstroSkel
-    screen.blit(npcsc1, pygame.rect.Rect(130, 130, 0, 0))  ##NPC1
+    screen.blit(skel, pygame.rect.Rect(477, 196, 0, 0))  ##MonstroSkel
+    screen.blit(npcsc1, pygame.rect.Rect(202, 216, 0, 0))  ##NPC1
+    screen.blit(npcsc2, pygame.rect.Rect(336,104,0,0)) ##NPC2
     screen.blit(text, pygame.rect.Rect(textx, texty, 0, 0)) ##Texto NPCS
     screen.blit(text2, pygame.rect.Rect(textx2, texty2, 0, 0))  ##Texto2 NPCS
     screen.blit(textitems, pygame.rect.Rect(0, 0, 0, 0))  ##Texto Itens
@@ -256,9 +256,8 @@ while tela == 2:
         text = font.render('', 1, white)  ##Apaga texto
         text2 = font.render('', 1, white)  ##Apaga texto
 
-
     #Padrão Travas Bordas
-    if x < 0:
+    if x < 69:
         x += 1
     if y < 0:
         y += 1
@@ -268,31 +267,25 @@ while tela == 2:
         y = (height-24)
 
     ##Areas Travadas##
-    area(46,5,138,80)
-    area(166,142,207,195)
-    ##NPCs Puzzles
-    if texty == 119 and ve == 1:
-        #bg = pygame.image.load("bg2vento.png").convert()
-        tx1 = 'A ventania passou...'
-        ve = 0
-    if texty == 148 and ve == 0:
-        bg = pygame.image.load("bg2.png").convert()
-        tx = 'Agora que o vento passou, me traga uma semente.'
-        ve = 2
-    if texty == 119 and ve == 2 and 'semente' in itens:
-        itens.remove('semente') ##Remove da lista
-        sleep(0.1)
-        tx = 'Muito obrigado pela semente.'
-        tx1 = 'Tronco cortado...'
-    npc(114, 107, 156, 150, 100, 100, 'Você está no mundo Hades!','Que loucura, fale com alguém!')
-    npc(50, 152, 86, 179, 48, 148, tx1)
+    area(237,135,343,241) #mesa
+    area(68,238,201,238) #parede1
+    #NPCs
+    npc(175, 175, 232, 240, 150, 180, 'Você está no mundo Hades!','Que loucura, fale com alguém!')
+    npc(314, 62, 359, 127, 314, 62, 'Daqui você não passa.')
+    ##NPC Recebe Itens
+    if textx == 314 and 'escudo' in itens and 'prato' in itens and 'moeda' in itens:
+        text = font.render('Até logo!', 1, white)
+        itens.remove('prato');itens.remove('moeda');itens.remove('escudo')
+        #gameover = 1
+        #tela = -1
     ##Items
-    item(208, 151, 224, 178, 'semente', 'Voce achou uma semente.')
-    item(25, 65, 36, 75, 'pedra', 'Voce achou uma pedra.')
+    item(424,101,469,135,'moeda','Você achou uma moeda.')
+    item(328,147,364,174,'prato','Você achou um prato.')
+    #item(208, 151, 224, 178, 'semente', 'Voce achou uma semente.')
 
     pygame.time.delay(10)
 
-while gameover == 2:
+while gameover == 1:
     ##Saida ##
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
