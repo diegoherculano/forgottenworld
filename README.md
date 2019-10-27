@@ -1,2 +1,2 @@
 # forgottenworld
-Game project for IESP college with python and pygame.
+Game project with python and pygame.
