@@ -39,7 +39,7 @@ screen = pygame.display.set_mode(size)
 person = pygame.image.load(persondown[0]).convert_alpha()
 npcsc1 = pygame.image.load(npc[0]).convert_alpha()
 npcsc2 = pygame.image.load(npc[1]).convert_alpha()
-bg = pygame.image.load("bg3.jpg").convert()
+bg = pygame.image.load("bg3.png").convert()
 bgmenu = pygame.image.load("images/bgmenu.png").convert()
 bgseta = pygame.image.load("images/bgseta.png").convert_alpha()
 bghistoria = pygame.image.load("images/bghistoria.png").convert()
@@ -216,7 +216,7 @@ while tela == 2:
     tvida = ' | '.join(vida)
     textitems = font.render('Itens: ' + titem, 1, white)
     textvida = font.render(' ' + tvida, 1, red)
-    skel = monsters(0, 454, 156, 507, 230, 'escudo') ##Monstro
+    skel = monsters(0, 454, 156, 503, 220, 'escudo') ##Monstro
 
     ##Chamada de Tela##
     screen.blit(bg, (0,0)) ##Background
@@ -234,7 +234,7 @@ while tela == 2:
     pygame.display.update() ##Atualiza a interface
     pressed = pygame.key.get_pressed() ##Recebe as hotkeys apertadas
 
-    #print(f'x={x} y={y}') ##Coord do Person
+    print(f'x={x} y={y}') ##Coord do Person
 
     ### GAMEPAD ###
     if pressed[pygame.K_DOWN]:
@@ -267,20 +267,31 @@ while tela == 2:
         y = (height-24)
 
     ##Areas Travadas##
-    area(237,135,343,241) #mesa
-    area(68,238,201,238) #parede1
+    area(68, 238, 201, 238)  # parede1
+    area(241, 138, 349, 253)  # mesa
+    area(68, 253, 195, 281)
+    area(157, 254, 187, 372)
+    area(148, 315, 285, 343)
+    area(270, 329, 345, 371)
+    area(332, 313, 432, 341)
+    area(389, 220, 434, 377)
+    area(391, 225, 528, 292)
+    area(485, 98, 528, 293)
+    area(151, 14, 199, 200)
+    area(150, 16, 334, 126)
+    area(355, 14, 520, 126)
     #NPCs
-    npc(175, 175, 232, 240, 150, 180, 'Você está no mundo Hades!','Que loucura, fale com alguém!')
-    npc(314, 62, 359, 127, 314, 62, 'Daqui você não passa.')
+    npc(175, 175, 232, 240, 150, 180, 'Como você chegou a Hades?','Você nunca sairá.')
+    npc(314, 62, 359, 127, 314, 62, 'Para você sair daqui,','Deverá me entregar 3 itens.')
     ##NPC Recebe Itens
-    if textx == 314 and 'escudo' in itens and 'prato' in itens and 'moeda' in itens:
+    if textx == 314 and 'escudo' in itens and 'mapa' in itens and 'moeda' in itens:
         text = font.render('Até logo!', 1, white)
         itens.remove('prato');itens.remove('moeda');itens.remove('escudo')
         #gameover = 1
         #tela = -1
     ##Items
     item(424,101,469,135,'moeda','Você achou uma moeda.')
-    item(328,147,364,174,'prato','Você achou um prato.')
+    item(328,147,364,174,'mapa','Você achou um mapa.')
     #item(208, 151, 224, 178, 'semente', 'Voce achou uma semente.')
 
     pygame.time.delay(10)
