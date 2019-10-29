@@ -9,7 +9,7 @@ white = (255,255,255)
 red = (255,204,204)
 x = 70
 y = 250
-tela = 2
+tela = 0
 pygame.display.set_caption("Forgotten World")
 
 ##Textos
@@ -40,6 +40,7 @@ person = pygame.image.load(persondown[0]).convert_alpha()
 npcsc1 = pygame.image.load(npc[0]).convert_alpha()
 npcsc2 = pygame.image.load(npc[1]).convert_alpha()
 bg = pygame.image.load("bg3.png").convert()
+bg2 = pygame.image.load("images/bg2.png").convert()
 bgmenu = pygame.image.load("images/bgmenu.png").convert()
 bgseta = pygame.image.load("images/bgseta.png").convert_alpha()
 bghistoria = pygame.image.load("images/bghistoria.png").convert()
@@ -229,14 +230,8 @@ while tela == 2:
     screen.blit(textvida, pygame.rect.Rect(0, 15, 0, 0))  ##Texto Vida
     screen.blit(person, pygame.rect.Rect(x, y, 0, 0))  ##Personagem
 
-    ##Outros##
-    pygame.display.set_caption("Sublime") ##Nome da Janela
-    pygame.display.update() ##Atualiza a interface
-    pressed = pygame.key.get_pressed() ##Recebe as hotkeys apertadas
-
-    print(f'x={x} y={y}') ##Coord do Person
-
     ### GAMEPAD ###
+    pressed = pygame.key.get_pressed()  ##Recebe as hotkeys apertadas
     if pressed[pygame.K_DOWN]:
         y += 1
         person = pygame.image.load(persondown[walk()]).convert_alpha() ##Animação andar
@@ -286,15 +281,62 @@ while tela == 2:
     ##NPC Recebe Itens
     if textx == 314 and 'escudo' in itens and 'mapa' in itens and 'moeda' in itens:
         text = font.render('Até logo!', 1, white)
-        itens.remove('prato');itens.remove('moeda');itens.remove('escudo')
-        #gameover = 1
-        #tela = -1
+        text2 = font.render('', 1, white)
+        itens.remove('escudo');itens.remove('mapa');itens.remove('moeda')
+        tela = 3
     ##Items
     item(424,101,469,135,'moeda','Você achou uma moeda.')
     item(328,147,364,174,'mapa','Você achou um mapa.')
     #item(208, 151, 224, 178, 'semente', 'Voce achou uma semente.')
 
-    pygame.time.delay(10)
+    ##Outros##
+    pygame.display.update() ##Atualiza a interface
+    pygame.time.delay(10) ##Delay
+    #print(f'x={x} y={y}')  ##Coord do Person
+
+x=337;y=184
+while tela == 3:
+    ##Saida ##
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT: sys.exit()
+        # print(event)
+    ##Variáveis
+    titem = ', '.join(itens)
+    tvida = ' | '.join(vida)
+    textitems = font.render('Itens: ' + titem, 1, white)
+    textvida = font.render(' ' + tvida, 1, red)
+    ##Chamada de Tela##
+    screen.blit(bg2, (0, 0))  ##Background
+    screen.blit(text, pygame.rect.Rect(textx, texty, 0, 0))  ##Texto NPCS
+    screen.blit(text2, pygame.rect.Rect(textx2, texty2, 0, 0))  ##Texto2 NPCS
+    screen.blit(textitems, pygame.rect.Rect(0, 0, 0, 0))  ##Texto Itens
+    screen.blit(textvida, pygame.rect.Rect(0, 15, 0, 0))  ##Texto Vida
+    screen.blit(person, pygame.rect.Rect(x, y, 0, 0))  ##Personagem
+
+    ### GAMEPAD ###
+    pressed = pygame.key.get_pressed()  ##Recebe as hotkeys apertadas
+    if pressed[pygame.K_DOWN]:
+        y += 1
+        person = pygame.image.load(persondown[walk()]).convert_alpha()  ##Animação andar
+        text = font.render('', 1, white)  ##Apaga texto
+        text2 = font.render('', 1, white)  ##Apaga texto
+    if pressed[pygame.K_UP]:
+        y -= 1
+        person = pygame.image.load(personup[walk()]).convert_alpha()  ##Animação andar
+    if pressed[pygame.K_RIGHT]:
+        x += 1
+        person = pygame.image.load(personright[walk()]).convert_alpha()  ##Animação andar
+        text = font.render('', 1, white)  ##Apaga texto
+        text2 = font.render('', 1, white)  ##Apaga texto
+    if pressed[pygame.K_LEFT]:
+        x -= 1
+        person = pygame.image.load(personleft[walk()]).convert_alpha()  ##Animação andar
+        text = font.render('', 1, white)  ##Apaga texto
+        text2 = font.render('', 1, white)  ##Apaga texto
+    ##Outros##
+    pygame.display.update() ##Atualiza a interface
+    pygame.time.delay(10) ##Delay
+    #print(f'x={x} y={y}')  ##Coord do Person
 
 while gameover == 1:
     ##Saida ##
