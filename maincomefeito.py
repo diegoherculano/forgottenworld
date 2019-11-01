@@ -9,7 +9,7 @@ white = (255,255,255)
 red = (255,204,204)
 x = 70
 y = 250
-tela = 0
+tela = 3
 r = 10
 fundo = (0, 0, 0)
 circulo = (255,255,255)
@@ -34,7 +34,7 @@ personright = ['images/direita/direita0.png', 'images/direita/direita1.png', 'im
 persondown = ['images/frente/frente0.png', 'images/frente/frente1.png', 'images/frente/frente2.png', 'images/frente/frente3.png', 'images/frente/frente4.png', 'images/frente/frente5.png', 'images/frente/frente6.png', 'images/frente/frente7.png', 'images/frente/frente8.png']
 personleft = ['images/esquerda/esquerda0.png', 'images/esquerda/esquerda1.png', 'images/esquerda/esquerda2.png', 'images/esquerda/esquerda3.png', 'images/esquerda/esquerda4.png', 'images/esquerda/esquerda5.png', 'images/esquerda/esquerda6.png', 'images/esquerda/esquerda7.png', 'images/esquerda/esquerda8.png']
 personup = ['images/tras/tras0.png', 'images/tras/tras1.png', 'images/tras/tras2.png', 'images/tras/tras3.png', 'images/tras/tras4.png', 'images/tras/tras5.png', 'images/tras/tras6.png', 'images/tras/tras7.png', 'images/tras/tras8.png']
-npc = ["images/npc1.png","images/npc2.png"]
+npc = ["images/npc1.png","images/npc2.png","images/npc3.png"]
 monster = ["images/skelwarfrente.png", "images/skelwartras.png", "images/skelwardead.png"]
 
 #Tela
@@ -44,6 +44,7 @@ surface = pygame.Surface(size, pygame.SRCALPHA, 32)
 person = pygame.image.load(persondown[0]).convert_alpha()
 npcsc1 = pygame.image.load(npc[0]).convert_alpha()
 npcsc2 = pygame.image.load(npc[1]).convert_alpha()
+npcsc3 = pygame.image.load(npc[2]).convert_alpha()
 bg = pygame.image.load("bg3.png").convert()
 bg2 = pygame.image.load("images/bg2.png").convert()
 bgmenu = pygame.image.load("images/bgmenu.png").convert()
@@ -86,7 +87,7 @@ def area(topx, topy, rightx, righty):
 ## FUNCAO NPC ##
 def npc(topx, topy, rightx, righty, ttx, tty, texto, texto2=''):
     global x; global y; global text; global textx; global texty; global text2; global textx2; global texty2;
-    if x == (topx) and (topy) <= y <= (topy):
+    if x == (topx) and (topy) <= y <= (righty):
         x -= 1
     if y == (righty) and (topx) <= x <= (rightx):
         y += 1
@@ -315,7 +316,7 @@ while tela == 2:
     pygame.time.delay(50) ##Delay
     #print(f'x={x} y={y}')  ##Coord do Person
 
-x=337;y=184
+x=337;y=193
 while tela == 3:
     ##Saida ##
     for event in pygame.event.get():
@@ -328,6 +329,7 @@ while tela == 3:
     textvida = font.render(' ' + tvida, 1, red)
     ##Chamada de Tela##
     screen.blit(bg2, (0, 0))  ##Background
+    screen.blit(npcsc3, pygame.rect.Rect(397, 190, 0, 0))
     screen.blit(text, pygame.rect.Rect(textx, texty, 0, 0))  ##Texto NPCS
     screen.blit(text2, pygame.rect.Rect(textx2, texty2, 0, 0))  ##Texto2 NPCS
     screen.blit(textitems, pygame.rect.Rect(0, 0, 0, 0))  ##Texto Itens
@@ -354,10 +356,13 @@ while tela == 3:
         person = pygame.image.load(personleft[walk()]).convert_alpha()  ##Animação andar
         text = font.render('', 1, white)  ##Apaga texto
         text2 = font.render('', 1, white)  ##Apaga texto
+
+    ##NPCs
+    npc(370, 143, 425, 205, 372, 142, 'Como você chegou a Hades?', 'Você nunca sairá.')
     ##Outros##
     pygame.display.update() ##Atualiza a interface
     pygame.time.delay(50) ##Delay
-    #print(f'x={x} y={y}')  ##Coord do Person
+    print(f'x={x} y={y}')  ##Coord do Person
 
 while gameover == 1:
     ##Saida ##
