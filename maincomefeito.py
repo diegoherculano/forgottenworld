@@ -9,7 +9,7 @@ white = (255,255,255)
 red = (255,204,204)
 x = 70
 y = 250
-tela = 3
+tela = 2
 r = 10
 fundo = (0, 0, 0)
 circulo = (255,255,255)
@@ -34,7 +34,7 @@ personright = ['images/direita/direita0.png', 'images/direita/direita1.png', 'im
 persondown = ['images/frente/frente0.png', 'images/frente/frente1.png', 'images/frente/frente2.png', 'images/frente/frente3.png', 'images/frente/frente4.png', 'images/frente/frente5.png', 'images/frente/frente6.png', 'images/frente/frente7.png', 'images/frente/frente8.png']
 personleft = ['images/esquerda/esquerda0.png', 'images/esquerda/esquerda1.png', 'images/esquerda/esquerda2.png', 'images/esquerda/esquerda3.png', 'images/esquerda/esquerda4.png', 'images/esquerda/esquerda5.png', 'images/esquerda/esquerda6.png', 'images/esquerda/esquerda7.png', 'images/esquerda/esquerda8.png']
 personup = ['images/tras/tras0.png', 'images/tras/tras1.png', 'images/tras/tras2.png', 'images/tras/tras3.png', 'images/tras/tras4.png', 'images/tras/tras5.png', 'images/tras/tras6.png', 'images/tras/tras7.png', 'images/tras/tras8.png']
-npc = ["images/npc1.png","images/npc2.png","images/npc3.png"]
+npc = ["images/npc1.png","images/npc2.png","images/npc3.png","images/npc4.png"]
 monster = ["images/skelwarfrente.png", "images/skelwartras.png", "images/skelwardead.png"]
 
 #Tela
@@ -42,9 +42,11 @@ screen = pygame.display.set_mode(size)
 surface = pygame.Surface(size, pygame.SRCALPHA, 32)
 #Carregamento de PNGs
 person = pygame.image.load(persondown[0]).convert_alpha()
+faca = pygame.image.load("images/faca.png").convert_alpha()
 npcsc1 = pygame.image.load(npc[0]).convert_alpha()
 npcsc2 = pygame.image.load(npc[1]).convert_alpha()
 npcsc3 = pygame.image.load(npc[2]).convert_alpha()
+npcsc4 = pygame.image.load(npc[3]).convert_alpha()
 bg = pygame.image.load("bg3.png").convert()
 bg2 = pygame.image.load("images/bg2.png").convert()
 bgmenu = pygame.image.load("images/bgmenu.png").convert()
@@ -328,8 +330,13 @@ while tela == 3:
     textitems = font.render('Itens: ' + titem, 1, white)
     textvida = font.render(' ' + tvida, 1, red)
     ##Chamada de Tela##
-    screen.blit(bg2, (0, 0))  ##Background
-    screen.blit(npcsc3, pygame.rect.Rect(397, 190, 0, 0))
+    if 'faca' in itens:
+        screen.blit(bg2, (0, 0))  ##Background
+    else:
+        screen.blit(bg2, (0, 0))  ##Background
+        screen.blit(faca, pygame.rect.Rect(479, 298, 0, 0))  ##Faca
+    screen.blit(npcsc3, pygame.rect.Rect(397, 190, 0, 0)) ##NPC1
+    screen.blit(npcsc4, pygame.rect.Rect(540, 335, 0, 0)) ##NPC2
     screen.blit(text, pygame.rect.Rect(textx, texty, 0, 0))  ##Texto NPCS
     screen.blit(text2, pygame.rect.Rect(textx2, texty2, 0, 0))  ##Texto2 NPCS
     screen.blit(textitems, pygame.rect.Rect(0, 0, 0, 0))  ##Texto Itens
@@ -358,7 +365,24 @@ while tela == 3:
         text2 = font.render('', 1, white)  ##Apaga texto
 
     ##NPCs
-    npc(370, 143, 425, 205, 372, 142, 'Como você chegou a Hades?', 'Você nunca sairá.')
+    npc(370, 143, 425, 205, 372, 142, 'Sou o guarda de Tártaro', 'Seja cuidadoso.')
+    npc(518, 293, 565, 362, 420, 292, 'Tenha cuidado com a floresta..', 'Ela é muito perigosa.')
+    ##Areas
+    if x < 312:
+        x += 1
+    if y < 192:
+        y += 1
+    if y > 380:
+        y -= 1
+    if x > 545:
+       x -= 1
+    area(358, 284, 384, 360)
+    area(358, 299, 517, 360)
+    area(406, 290, 412, 302)
+    area(480, 192, 539, 360)
+    area(479, 149, 569, 219)
+    ##Itens
+    item(446, 243, 508, 296, 'faca', 'Você achou uma faca.')
     ##Outros##
     pygame.display.update() ##Atualiza a interface
     pygame.time.delay(50) ##Delay
