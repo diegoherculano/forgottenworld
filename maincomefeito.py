@@ -9,7 +9,7 @@ white = (255,255,255)
 red = (255,204,204)
 x = 70
 y = 250
-tela = 2
+tela = 3
 r = 10
 fundo = (0, 0, 0)
 circulo = (255,255,255)
@@ -49,6 +49,7 @@ npcsc3 = pygame.image.load(npc[2]).convert_alpha()
 npcsc4 = pygame.image.load(npc[3]).convert_alpha()
 bg = pygame.image.load("bg3.png").convert()
 bg2 = pygame.image.load("images/bg2.png").convert()
+bg3 = pygame.image.load("images/bg3.png").convert()
 bgmenu = pygame.image.load("images/bgmenu.png").convert()
 bgseta = pygame.image.load("images/bgseta.png").convert_alpha()
 bghistoria = pygame.image.load("images/bghistoria.png").convert()
@@ -319,6 +320,7 @@ while tela == 2:
     #print(f'x={x} y={y}')  ##Coord do Person
 
 x=337;y=193
+sleep(0.5)
 while tela == 3:
     ##Saida ##
     for event in pygame.event.get():
@@ -367,6 +369,13 @@ while tela == 3:
     ##NPCs
     npc(370, 143, 425, 205, 372, 142, 'Sou o guarda de Tártaro', 'Seja cuidadoso.')
     npc(518, 293, 565, 362, 420, 292, 'Tenha cuidado com a floresta..', 'Ela é muito perigosa.')
+    ##NPC Pluzze
+    if textx == 420 and 'faca' in itens:
+        tela = 4
+    elif textx == 420:
+        text = font.render('Você deveria pegar aquela faca', 1, white)
+        text2 = font.render('Ela lhe ajudará na floresta', 1, white)
+        textx = 419
     ##Areas
     if x < 312:
         x += 1
@@ -388,13 +397,59 @@ while tela == 3:
     pygame.time.delay(50) ##Delay
     print(f'x={x} y={y}')  ##Coord do Person
 
+x=62;y=244
+text = font.render('Tenha cuidado com a floresta', 1, white)  ##Apaga texto
+text2 = font.render('Ela é muito perigosa!', 1, white)  ##Apaga
+sleep(0.5)
+while tela == 4:
+    ##Saida ##
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT: sys.exit()
+        # print(event)
+    ##Variáveis
+    titem = ', '.join(itens)
+    tvida = ' | '.join(vida)
+    textitems = font.render('Itens: ' + titem, 1, white)
+    textvida = font.render(' ' + tvida, 1, red)
+    ##Chamada de Tela##
+    screen.blit(bg3, (0, 0))  ##Background
+    screen.blit(text, pygame.rect.Rect(textx, texty, 0, 0))  ##Texto NPCS
+    screen.blit(text2, pygame.rect.Rect(textx2, texty2, 0, 0))  ##Texto2 NPCS
+    screen.blit(textitems, pygame.rect.Rect(0, 0, 0, 0))  ##Texto Itens
+    screen.blit(textvida, pygame.rect.Rect(0, 15, 0, 0))  ##Texto Vida
+    screen.blit(person, pygame.rect.Rect(x, y, 0, 0))  ##Personagem
+
+    ### GAMEPAD ###
+    pressed = pygame.key.get_pressed()  ##Recebe as hotkeys apertadas
+    if pressed[pygame.K_DOWN]:
+        y += 1
+        person = pygame.image.load(persondown[walk()]).convert_alpha()  ##Animação andar
+        text = font.render('', 1, white)  ##Apaga texto
+        text2 = font.render('', 1, white)  ##Apaga texto
+    if pressed[pygame.K_UP]:
+        y -= 1
+        person = pygame.image.load(personup[walk()]).convert_alpha()  ##Animação andar
+    if pressed[pygame.K_RIGHT]:
+        x += 1
+        person = pygame.image.load(personright[walk()]).convert_alpha()  ##Animação andar
+        text = font.render('', 1, white)  ##Apaga texto
+        text2 = font.render('', 1, white)  ##Apaga texto
+    if pressed[pygame.K_LEFT]:
+        x -= 1
+        person = pygame.image.load(personleft[walk()]).convert_alpha()  ##Animação andar
+        text = font.render('', 1, white)  ##Apaga texto
+        text2 = font.render('', 1, white)  ##Apaga texto
+    ##Outros##
+    pygame.display.update() ##Atualiza a interface
+    pygame.time.delay(50) ##Delay
+    print(f'x={x} y={y}')  ##Coord do Person
+
 while gameover == 1:
     ##Saida ##
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
     bg = pygame.image.load("bgover.jpg").convert()
     screen.blit(bg, (0,0)) ##Background
-    pygame.display.set_caption("Sublime") ##Nome da Janela
     pygame.display.update() ##Atualiza a interface
     print('gameover!')
     pygame.time.delay(100)
