@@ -74,9 +74,16 @@ def walk():
     else:
         andar = 0
         return andar
-## FUNCAO AREA ##
+## FUNCAO AREA #area(241, 138, 349, 253)#
 def area(topx, topy, rightx, righty):
     global x; global y;
+    '''
+    pygame.draw.line(screen, white, [241+23, 253], [349, 253], 2)
+    pygame.draw.line(screen, white, [349, 253], [349, 138+48], 2)
+    pygame.draw.line(screen, white, [241+23, 138+48], [349, 138+48], 2)
+    pygame.draw.line(screen, white, [241+23, 138+48], [241+23, 253], 2)
+    '''
+    pygame.draw.rect(screen, white, [topx, topy, rightx-topx, righty-topy], 2)
     if x == (topx) and (topy) <= y <= (righty):
         x -= 1
     if y == (righty) and (topx) <= x <= (rightx):
@@ -236,7 +243,7 @@ while tela == 2:
     ##Saida ##
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
-        #print(event)
+        print(event)
     ##Variáveis
     titem = ', '.join(itens)
     tvida = ' | '.join(vida)
