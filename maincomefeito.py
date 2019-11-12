@@ -9,11 +9,11 @@ white = (255,255,255)
 red = (255,204,204)
 x = 70
 y = 250
-tela = 3
+tela = 4
 r = 10
 fundo = (0, 0, 0)
 circulo = (255,255,255)
-
+pa = 1
 pygame.display.set_caption("Forgotten World")
 
 ##Textos
@@ -34,8 +34,8 @@ personright = ['images/direita/direita0.png', 'images/direita/direita1.png', 'im
 persondown = ['images/frente/frente0.png', 'images/frente/frente1.png', 'images/frente/frente2.png', 'images/frente/frente3.png', 'images/frente/frente4.png', 'images/frente/frente5.png', 'images/frente/frente6.png', 'images/frente/frente7.png', 'images/frente/frente8.png']
 personleft = ['images/esquerda/esquerda0.png', 'images/esquerda/esquerda1.png', 'images/esquerda/esquerda2.png', 'images/esquerda/esquerda3.png', 'images/esquerda/esquerda4.png', 'images/esquerda/esquerda5.png', 'images/esquerda/esquerda6.png', 'images/esquerda/esquerda7.png', 'images/esquerda/esquerda8.png']
 personup = ['images/tras/tras0.png', 'images/tras/tras1.png', 'images/tras/tras2.png', 'images/tras/tras3.png', 'images/tras/tras4.png', 'images/tras/tras5.png', 'images/tras/tras6.png', 'images/tras/tras7.png', 'images/tras/tras8.png']
-npc = ["images/npc1.png","images/npc2.png","images/npc3.png","images/npc4.png"]
-monster = ["images/skelwarfrente.png", "images/skelwartras.png", "images/skelwardead.png"]
+npc = ["images/npc1.png","images/npc2.png","images/npc3.png","images/npc4.png", "images/npc5.png"]
+monster = ["images/skelwarfrente.png", "images/skelwartras.png", "images/skelwardead.png", "images/goblinfrente.png", "images/goblintras.png", "images/goblindead.png"]
 
 #Tela
 screen = pygame.display.set_mode(size)
@@ -47,6 +47,7 @@ npcsc1 = pygame.image.load(npc[0]).convert_alpha()
 npcsc2 = pygame.image.load(npc[1]).convert_alpha()
 npcsc3 = pygame.image.load(npc[2]).convert_alpha()
 npcsc4 = pygame.image.load(npc[3]).convert_alpha()
+npcsc5 = pygame.image.load(npc[4]).convert_alpha()
 bg = pygame.image.load("bg3.png").convert()
 bg2 = pygame.image.load("images/bg2.png").convert()
 bg3 = pygame.image.load("images/bg3.png").convert()
@@ -54,6 +55,8 @@ bgmenu = pygame.image.load("images/bgmenu.png").convert()
 bgseta = pygame.image.load("images/bgseta.png").convert_alpha()
 bghistoria = pygame.image.load("images/bghistoria.png").convert()
 imghistoria = pygame.image.load("images/historia.png").convert_alpha()
+imgpedra = pygame.image.load("images/pedra.png").convert_alpha()
+imgpick = pygame.image.load("images/pick.png").convert_alpha()
 #pygame.mouse.set_visible(0)
 
 ##Funcao Efeito Circle
@@ -119,7 +122,7 @@ def npc(topx, topy, rightx, righty, ttx, tty, texto, texto2=''):
 def item(cordtopx, cordtopy, cordbackx, cordbacky, item, texto):
     global x; global y; global text; global textx; global texty; global itens;
     if cordtopx <= x <= cordbackx and cordtopy <= y <= cordbacky and item not in itens:
-        textx = cordtopx; texty = cordtopy;
+        textx = cordtopx-60; texty = cordtopy;
         text = font.render(texto, 1, white)
         itens.append(item) ##Add na lista
         sleep(0.5)
@@ -185,6 +188,32 @@ def monsters(img, topx, topy, rightx, righty, item):
                 return pygame.image.load(monster[img]).convert_alpha()
     else:
         return pygame.image.load(monster[img + 2]).convert_alpha()
+
+
+def itemtrap(img, topx, topy, rightx, righty, item, imgx, imgy):
+    global x; global person;
+    global y; global texty; global textx; global text; global gameover; global tela;
+    global itens; global pa;
+    if item in itens:
+        if x == (topx) and (topy) <= y <= (righty):
+            pa = 0
+        if y == (righty) and (topx) <= x <= (rightx):
+            pa = 0
+        if x == (rightx) and (topy) <= y <= (righty):
+            pa = 0
+        if y == (topy) and (topx) <= x <= (rightx):
+            pa = 0
+    else:
+        if x == (topx) and (topy) <= y <= (righty):
+            x -= 1
+        if y == (righty) and (topx) <= x <= (rightx):
+            y += 1
+        if x == (rightx) and (topy) <= y <= (righty):
+            x += 1
+        if y == (topy) and (topx) <= x <= (rightx):
+            y -= 1
+    if pa == 1:
+        screen.blit(img, pygame.rect.Rect(imgx, imgy, 0, 0)) ##Img pedra
 
 bgsetax = 98
 bgsetay = 241 #241,273
@@ -256,11 +285,12 @@ while tela == 2:
     screen.blit(skel, pygame.rect.Rect(477, 196, 0, 0))  ##MonstroSkel
     screen.blit(npcsc1, pygame.rect.Rect(202, 216, 0, 0))  ##NPC1
     screen.blit(npcsc2, pygame.rect.Rect(336,104,0,0)) ##NPC2
+    screen.blit(person, pygame.rect.Rect(x, y, 0, 0))  ##Personagem
     screen.blit(text, pygame.rect.Rect(textx, texty, 0, 0)) ##Texto NPCS
     screen.blit(text2, pygame.rect.Rect(textx2, texty2, 0, 0))  ##Texto2 NPCS
     screen.blit(textitems, pygame.rect.Rect(0, 0, 0, 0))  ##Texto Itens
     screen.blit(textvida, pygame.rect.Rect(0, 15, 0, 0))  ##Texto Vida
-    screen.blit(person, pygame.rect.Rect(x, y, 0, 0))  ##Personagem
+
 
     ### GAMEPAD ###
     pressed = pygame.key.get_pressed()  ##Recebe as hotkeys apertadas
@@ -346,11 +376,12 @@ while tela == 3:
         screen.blit(faca, pygame.rect.Rect(479, 298, 0, 0))  ##Faca
     screen.blit(npcsc3, pygame.rect.Rect(397, 190, 0, 0)) ##NPC1
     screen.blit(npcsc4, pygame.rect.Rect(540, 335, 0, 0)) ##NPC2
+    screen.blit(person, pygame.rect.Rect(x, y, 0, 0))  ##Personagem
     screen.blit(text, pygame.rect.Rect(textx, texty, 0, 0))  ##Texto NPCS
     screen.blit(text2, pygame.rect.Rect(textx2, texty2, 0, 0))  ##Texto2 NPCS
     screen.blit(textitems, pygame.rect.Rect(0, 0, 0, 0))  ##Texto Itens
     screen.blit(textvida, pygame.rect.Rect(0, 15, 0, 0))  ##Texto Vida
-    screen.blit(person, pygame.rect.Rect(x, y, 0, 0))  ##Personagem
+
 
     ### GAMEPAD ###
     pressed = pygame.key.get_pressed()  ##Recebe as hotkeys apertadas
@@ -412,19 +443,26 @@ while tela == 4:
     ##Saida ##
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
-        # print(event)
+        #print(event)
     ##Variáveis
     titem = ', '.join(itens)
     tvida = ' | '.join(vida)
     textitems = font.render('Itens: ' + titem, 1, white)
     textvida = font.render(' ' + tvida, 1, red)
+    globin = monsters(3, 418, 164, 466, 253 , 'chave')  ##Monstro
+
     ##Chamada de Tela##
     screen.blit(bg3, (0, 0))  ##Background
+    itemtrap(imgpedra, 419, 145, 467, 207, 'picareta', 438, 188) ##Img Pedra Funciton
+    if 'picareta' not in itens: ## Some picareta
+        screen.blit(imgpick, pygame.rect.Rect(545, 102, 0, 0)) ##Img picareta
+    screen.blit(npcsc5, pygame.rect.Rect(546, 265, 0, 0)) ##NPC
+    screen.blit(globin, pygame.rect.Rect(441, 205, 0, 0))  ##Monster
+    screen.blit(person, pygame.rect.Rect(x, y, 0, 0))  ##Personagem
     screen.blit(text, pygame.rect.Rect(textx, texty, 0, 0))  ##Texto NPCS
     screen.blit(text2, pygame.rect.Rect(textx2, texty2, 0, 0))  ##Texto2 NPCS
     screen.blit(textitems, pygame.rect.Rect(0, 0, 0, 0))  ##Texto Itens
     screen.blit(textvida, pygame.rect.Rect(0, 15, 0, 0))  ##Texto Vida
-    screen.blit(person, pygame.rect.Rect(x, y, 0, 0))  ##Personagem
 
     ### GAMEPAD ###
     pressed = pygame.key.get_pressed()  ##Recebe as hotkeys apertadas
@@ -446,9 +484,24 @@ while tela == 4:
         person = pygame.image.load(personleft[walk()]).convert_alpha()  ##Animação andar
         text = font.render('', 1, white)  ##Apaga texto
         text2 = font.render('', 1, white)  ##Apaga texto
+    ##Itens
+    item(520, 53, 572, 87, 'picareta', 'Você achou uma picareta.')
+    if 'chave' in itens:
+        item(283, 265, 330, 327, 'moedas', 'Você achou moedas de ouro.')
+    else:
+        npc(283, 265, 330, 327, 270, 265, 'Báu trancado.')
+    #NPCS
+    npc(97, 153, 145, 201, 90, 152, 'Cuidado!', 'Globins selvagens.') ##Placa
+    if 'moedas' in itens and textx == 450:
+        print('Parabéns, tchau!')
+        itens.remove('moedas')
+    else:
+        npc(517, 223, 573, 289, 450, 223, 'HAHA! Jamais sairá daqui!', 'Ao menos que me pague...')
+    ##Areas
+    #area(419, 145, 468, 187)
     ##Outros##
     pygame.display.update() ##Atualiza a interface
-    pygame.time.delay(50) ##Delay
+    pygame.time.delay(10) ##Delay
     print(f'x={x} y={y}')  ##Coord do Person
 
 while gameover == 1:
