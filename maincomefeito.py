@@ -7,9 +7,10 @@ pygame.font.init()
 size = width, height = 640, 480
 white = (255,255,255)
 red = (255,204,204)
+blue = (3, 74, 236)
 x = 70
 y = 250
-tela = 4
+tela = 0
 r = 10
 fundo = (0, 0, 0)
 circulo = (255,255,255)
@@ -51,6 +52,7 @@ npcsc5 = pygame.image.load(npc[4]).convert_alpha()
 bg = pygame.image.load("bg3.png").convert()
 bg2 = pygame.image.load("images/bg2.png").convert()
 bg3 = pygame.image.load("images/bg3.png").convert()
+bg4 = pygame.image.load("images/bg4rain.png")
 bgmenu = pygame.image.load("images/bgmenu.png").convert()
 bgseta = pygame.image.load("images/bgseta.png").convert_alpha()
 bghistoria = pygame.image.load("images/bghistoria.png").convert()
@@ -493,8 +495,9 @@ while tela == 4:
     #NPCS
     npc(97, 153, 145, 201, 90, 152, 'Cuidado!', 'Globins selvagens.') ##Placa
     if 'moedas' in itens and textx == 450:
-        print('Parabéns, tchau!')
+        npc(517, 223, 573, 289, 450, 223, 'Me dá logo isso aqui!', 'Adeus!')
         itens.remove('moedas')
+        tela = 5
     else:
         npc(517, 223, 573, 289, 450, 223, 'HAHA! Jamais sairá daqui!', 'Ao menos que me pague...')
     ##Areas
@@ -503,6 +506,71 @@ while tela == 4:
     pygame.display.update() ##Atualiza a interface
     pygame.time.delay(10) ##Delay
     print(f'x={x} y={y}')  ##Coord do Person
+
+rain = []
+for q in range(100):
+    rainx = random.randrange(65, 580)
+    rainy = random.randrange(47, 435)
+    rain.append([rainx, rainy])
+
+x=62;y=244
+while tela == 5:
+    ##Saida ##
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT: sys.exit()
+        #print(event)
+    ##Variáveis
+    titem = ', '.join(itens)
+    tvida = ' | '.join(vida)
+    textitems = font.render('Itens: ' + titem, 1, white)
+    textvida = font.render(' ' + tvida, 1, red)
+
+    ##Chamada de Tela##
+    screen.blit(bg4, (0, 0))  ##Background
+    screen.blit(person, pygame.rect.Rect(x, y, 0, 0))  ##Personagem
+    screen.blit(text, pygame.rect.Rect(textx, texty, 0, 0))  ##Texto NPCS
+    screen.blit(text2, pygame.rect.Rect(textx2, texty2, 0, 0))  ##Texto2 NPCS
+    screen.blit(textitems, pygame.rect.Rect(0, 0, 0, 0))  ##Texto Itens
+    screen.blit(textvida, pygame.rect.Rect(0, 15, 0, 0))  ##Texto Vida
+
+    ##Animação Chuva
+    for i in rain:
+        i[1] += 1
+        pygame.draw.circle(screen, blue, i, 1)
+    for v in rain:
+        v[1] += 2
+        pygame.draw.circle(screen, blue, v, 1)
+        if v[1] > 435:
+            i[1] = random.randrange(30, 80)
+            i[0] = random.randrange(65, 580)
+            v[1] = random.randrange(30, 80)
+            v[0] = random.randrange(65, 580)
+
+    ### GAMEPAD ###
+    pressed = pygame.key.get_pressed()  ##Recebe as hotkeys apertadas
+    if pressed[pygame.K_DOWN]:
+        y += 1
+        person = pygame.image.load(persondown[walk()]).convert_alpha()  ##Animação andar
+        text = font.render('', 1, white)  ##Apaga texto
+        text2 = font.render('', 1, white)  ##Apaga texto
+    if pressed[pygame.K_UP]:
+        y -= 1
+        person = pygame.image.load(personup[walk()]).convert_alpha()  ##Animação andar
+    if pressed[pygame.K_RIGHT]:
+        x += 1
+        person = pygame.image.load(personright[walk()]).convert_alpha()  ##Animação andar
+        text = font.render('', 1, white)  ##Apaga texto
+        text2 = font.render('', 1, white)  ##Apaga texto
+    if pressed[pygame.K_LEFT]:
+        x -= 1
+        person = pygame.image.load(personleft[walk()]).convert_alpha()  ##Animação andar
+        text = font.render('', 1, white)  ##Apaga texto
+        text2 = font.render('', 1, white)  ##Apaga texto
+
+    ##Outros##
+    pygame.display.update()  ##Atualiza a interface
+    pygame.time.delay(50)  ##Delay
+    #print(f'x={x} y={y}')  ##Coord do Person
 
 while gameover == 1:
     ##Saida ##
