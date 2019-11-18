@@ -49,11 +49,11 @@ npcsc2 = pygame.image.load(npc[1]).convert_alpha()
 npcsc3 = pygame.image.load(npc[2]).convert_alpha()
 npcsc4 = pygame.image.load(npc[3]).convert_alpha()
 npcsc5 = pygame.image.load(npc[4]).convert_alpha()
-bg = pygame.image.load("bg3.png").convert()
-bg2 = pygame.image.load("images/bg2.png").convert()
-bg3 = pygame.image.load("images/bg3.png").convert()
-bg4 = pygame.image.load("images/bg4rain.png").convert()
-bg5 = pygame.image.load("images/bg5.png").convert()
+bg = pygame.image.load("bg3icons.png").convert()
+bg2 = pygame.image.load("images/bg2icons.png").convert()
+bg3 = pygame.image.load("images/bg3icons.png").convert()
+bg4 = pygame.image.load("images/bg4icons.png").convert()
+bg5 = pygame.image.load("images/bg5icons.png").convert()
 bgmenu = pygame.image.load("images/bgmenu.png").convert()
 bgseta = pygame.image.load("images/bgseta.png").convert_alpha()
 bghistoria = pygame.image.load("images/bghistoria.png").convert()
@@ -89,7 +89,7 @@ def area(topx, topy, rightx, righty):
     pygame.draw.line(screen, white, [241+23, 138+48], [349, 138+48], 2)
     pygame.draw.line(screen, white, [241+23, 138+48], [241+23, 253], 2)
     '''
-    pygame.draw.rect(screen, white, [topx, topy, rightx-topx, righty-topy], 2)
+    #pygame.draw.rect(screen, white, [topx, topy, rightx-topx, righty-topy], 2)
     if x == (topx) and (topy) <= y <= (righty):
         x -= 1
     if y == (righty) and (topx) <= x <= (rightx):
@@ -291,8 +291,8 @@ while tela == 2:
     screen.blit(person, pygame.rect.Rect(x, y, 0, 0))  ##Personagem
     screen.blit(text, pygame.rect.Rect(textx, texty, 0, 0)) ##Texto NPCS
     screen.blit(text2, pygame.rect.Rect(textx2, texty2, 0, 0))  ##Texto2 NPCS
-    screen.blit(textitems, pygame.rect.Rect(0, 0, 0, 0))  ##Texto Itens
-    screen.blit(textvida, pygame.rect.Rect(0, 15, 0, 0))  ##Texto Vida
+    screen.blit(textitems, pygame.rect.Rect(31, 10, 0, 0))  ##Texto Itens
+    screen.blit(textvida, pygame.rect.Rect(30, 33, 0, 0))  ##Texto Vida
 
 
     ### GAMEPAD ###
@@ -382,8 +382,8 @@ while tela == 3:
     screen.blit(person, pygame.rect.Rect(x, y, 0, 0))  ##Personagem
     screen.blit(text, pygame.rect.Rect(textx, texty, 0, 0))  ##Texto NPCS
     screen.blit(text2, pygame.rect.Rect(textx2, texty2, 0, 0))  ##Texto2 NPCS
-    screen.blit(textitems, pygame.rect.Rect(0, 0, 0, 0))  ##Texto Itens
-    screen.blit(textvida, pygame.rect.Rect(0, 15, 0, 0))  ##Texto Vida
+    screen.blit(textitems, pygame.rect.Rect(31, 10, 0, 0))  ##Texto Itens
+    screen.blit(textvida, pygame.rect.Rect(30, 33, 0, 0))  ##Texto Vida
 
 
     ### GAMEPAD ###
@@ -464,8 +464,8 @@ while tela == 4:
     screen.blit(person, pygame.rect.Rect(x, y, 0, 0))  ##Personagem
     screen.blit(text, pygame.rect.Rect(textx, texty, 0, 0))  ##Texto NPCS
     screen.blit(text2, pygame.rect.Rect(textx2, texty2, 0, 0))  ##Texto2 NPCS
-    screen.blit(textitems, pygame.rect.Rect(0, 0, 0, 0))  ##Texto Itens
-    screen.blit(textvida, pygame.rect.Rect(0, 15, 0, 0))  ##Texto Vida
+    screen.blit(textitems, pygame.rect.Rect(31, 10, 0, 0))  ##Texto Itens
+    screen.blit(textvida, pygame.rect.Rect(30, 33, 0, 0))  ##Texto Vida
 
     ### GAMEPAD ###
     pressed = pygame.key.get_pressed()  ##Recebe as hotkeys apertadas
@@ -531,8 +531,8 @@ while tela == 5:
     screen.blit(person, pygame.rect.Rect(x, y, 0, 0))  ##Personagem
     screen.blit(text, pygame.rect.Rect(textx, texty, 0, 0))  ##Texto NPCS
     screen.blit(text2, pygame.rect.Rect(textx2, texty2, 0, 0))  ##Texto2 NPCS
-    screen.blit(textitems, pygame.rect.Rect(0, 0, 0, 0))  ##Texto Itens
-    screen.blit(textvida, pygame.rect.Rect(0, 15, 0, 0))  ##Texto Vida
+    screen.blit(textitems, pygame.rect.Rect(31, 10, 0, 0))  ##Texto Itens
+    screen.blit(textvida, pygame.rect.Rect(30, 33, 0, 0))  ##Texto Vida
 
     ##Animação Chuva
     for i in rain:
@@ -591,8 +591,8 @@ while tela == 6:
     screen.blit(person, pygame.rect.Rect(x, y, 0, 0))  ##Personagem
     screen.blit(text, pygame.rect.Rect(textx, texty, 0, 0))  ##Texto NPCS
     screen.blit(text2, pygame.rect.Rect(textx2, texty2, 0, 0))  ##Texto2 NPCS
-    screen.blit(textitems, pygame.rect.Rect(0, 0, 0, 0))  ##Texto Itens
-    screen.blit(textvida, pygame.rect.Rect(0, 15, 0, 0))  ##Texto Vida
+    screen.blit(textitems, pygame.rect.Rect(31, 10, 0, 0))  ##Texto Itens
+    screen.blit(textvida, pygame.rect.Rect(30, 33, 0, 0))  ##Texto Vida
 
     ### GAMEPAD ###
     pressed = pygame.key.get_pressed()  ##Recebe as hotkeys apertadas
