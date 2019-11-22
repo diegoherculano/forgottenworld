@@ -525,7 +525,42 @@ while tela == 4:
     else:
         npc(517, 223, 573, 289, 450, 223, 'HAHA! Jamais sairá daqui!', 'Ao menos que me pague...')
     ##Areas
-    #area(419, 145, 468, 187)
+    area(36, 285, 74, 419)
+    area(54, 300, 115, 428)
+    area(91, 318, 139, 428)
+    area(114, 336, 179, 428)
+    area(156, 355, 204, 419)
+    area(181, 364, 212, 429)
+    area(194, 378, 200, 424)
+    area(39, 46, 360, 124)
+    area(101, 100, 350, 152)
+    area(151, 133, 350, 182)
+    area(41, 155, 113, 208)
+    area(38, 101, 114, 192)
+    area(212, 150, 347, 257)
+    area(298, 11, 368, 205)
+    area(340, 8, 403, 86)
+    area(376, -2, 541, 67)
+    area(505, -3, 582, 67)
+    area(511, 169, 567, 237)
+    area(514, 162, 560, 201)
+    area(389, 357, 526, 424)
+    area(506, 368, 540, 424)
+    area(408, 331, 510, 383)
+    area(427, 316, 499, 368)
+    area(188, 269, 261, 338)
+    area(148, 245, 204, 308)
+    area(157, 224, 200, 266)
+    area(527,367,574,439)
+    #Padrão Travas Bordas
+    if x < 58:
+        x += 1
+    if y < 0:
+        y += 1
+    if x > 554:
+        x = 551
+    if y > 386:
+        y = 386
     ##Outros##
     pygame.display.update() ##Atualiza a interface
     pygame.time.delay(10) ##Delay
