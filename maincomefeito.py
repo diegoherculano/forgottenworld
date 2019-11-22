@@ -10,7 +10,7 @@ red = (255,204,204)
 blue = (3, 74, 236)
 x = 70
 y = 250
-tela = 6
+tela = 4
 r = 10
 fundo = (0, 0, 0)
 circulo = (255,255,255)
@@ -218,8 +218,16 @@ def itemtrap(img, topx, topy, rightx, righty, item, imgx, imgy):
     if pa == 1:
         screen.blit(img, pygame.rect.Rect(imgx, imgy, 0, 0)) ##Img pedra
 
+
+##SOMs
+if tela == 0:
+    pygame.mixer.music.load('songs/Intro.mp3')
+    pygame.mixer.music.play(-1)
+
+
 bgsetax = 98
 bgsetay = 241 #241,273
+
 while tela == 0:
     ##Saida ##
     for event in pygame.event.get():
@@ -244,6 +252,9 @@ while tela == 0:
     pygame.display.update()
     pygame.time.delay(50)
 
+if tela == 1:
+    pygame.mixer.music.load('songs/I know your secret.mp3')
+    pygame.mixer.music.play(0)
 historiax = 440
 while tela == 1:
     ##Saida ##
@@ -262,6 +273,10 @@ while tela == 1:
         historiax -= 0.5
     pygame.display.update()
     pygame.time.delay(50)
+
+if tela == 2:
+    pygame.mixer.music.load('songs/A Darkness Opus.mp3')
+    pygame.mixer.music.play(-1)
 
 ##Efeito
 while r < 380:
@@ -359,6 +374,10 @@ while tela == 2:
     pygame.time.delay(50) ##Delay
     #print(f'x={x} y={y}')  ##Coord do Person
 
+
+if tela == 3:
+    pygame.mixer.music.load('songs/Air.mp3')
+    pygame.mixer.music.play(-1)
 x=337;y=193
 sleep(0.5)
 while tela == 3:
@@ -438,6 +457,10 @@ while tela == 3:
     pygame.time.delay(50) ##Delay
     print(f'x={x} y={y}')  ##Coord do Person
 
+if tela == 4:
+    pygame.mixer.music.load('songs/Mystery Forest.mp3')
+    pygame.mixer.music.play(-1)
+
 x=62;y=244
 text = font.render('Tenha cuidado com a floresta', 1, white)  ##Apaga texto
 text2 = font.render('Ela é muito perigosa!', 1, white)  ##Apaga
@@ -508,6 +531,10 @@ while tela == 4:
     pygame.time.delay(10) ##Delay
     print(f'x={x} y={y}')  ##Coord do Person
 
+
+if tela == 5:
+    pygame.mixer.music.load('songs/Dark Quest.mp3')
+    pygame.mixer.music.play(-1)
 rain = []
 for q in range(100):
     rainx = random.randrange(65, 580)
@@ -574,6 +601,10 @@ while tela == 5:
     pygame.time.delay(50)  ##Delay
     #print(f'x={x} y={y}')  ##Coord do Person
 
+
+if tela == 6:
+    pygame.mixer.music.load('songs/Darkness March.mp3')
+    pygame.mixer.music.play(-1)
 x=305;y=274
 while tela == 6:
     ##Saida ##
@@ -620,7 +651,9 @@ while tela == 6:
     pygame.time.delay(50)  ##Delay
     #print(f'x={x} y={y}')  ##Coord do Person
 
-
+if gameover == 1:
+    pygame.mixer.music.load('songs/gameover.mp3')
+    pygame.mixer.music.play(0)
 while gameover == 1:
     ##Saida ##
     for event in pygame.event.get():

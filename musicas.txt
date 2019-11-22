@@ -1,0 +1,8 @@
+intro = Intro
+intro2 = I Know Your Secret 
+mapa1 = A Darkness Opus // Depressed Of Happytown
+mapa2 = Air
+mapa3 = Mystery Forest
+mapa4 = Dark Quest
+mapa5 = Darkness March
+fim = Feat
