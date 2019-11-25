@@ -667,6 +667,9 @@ while tela == 5:
     #NPCS
     npc(318, 155, 370, 222, 318, 155, 'Não temos saída.','O mago é muito forte.')
 
+    ##Areas
+
+
     ##Outros##
     pygame.display.update()  ##Atualiza a interface
     pygame.time.delay(50)  ##Delay
