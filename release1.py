@@ -11,7 +11,7 @@ blue = (3, 74, 236)
 green = (50, 249, 47)
 x = 70
 y = 250
-tela = 5
+tela = 0
 r = 10
 fundo = (0, 0, 0)
 circulo = (255,255,255)
@@ -400,7 +400,7 @@ while tela == 2:
 
     ##Outros##
     pygame.display.update() ##Atualiza a interface
-    pygame.time.delay(50) ##Delay
+    pygame.time.delay(10) ##Delay
     #print(f'x={x} y={y}')  ##Coord do Person
 
 
@@ -483,7 +483,7 @@ while tela == 3:
     item(446, 243, 508, 296, 'faca', 'Você achou uma faca.')
     ##Outros##
     pygame.display.update() ##Atualiza a interface
-    pygame.time.delay(50) ##Delay
+    pygame.time.delay(10) ##Delay
     #print(f'x={x} y={y}')  ##Coord do Person
 
 if tela == 4:
@@ -592,7 +592,7 @@ while tela == 4:
         y = 386
     ##Outros##
     pygame.display.update() ##Atualiza a interface
-    pygame.time.delay(50) ##Delay
+    pygame.time.delay(10) ##Delay
     #print(f'x={x} y={y}')  ##Coord do Person
 
 
@@ -672,7 +672,7 @@ while tela == 5:
 
     ##Outros##
     pygame.display.update()  ##Atualiza a interface
-    pygame.time.delay(50)  ##Delay
+    pygame.time.delay(10)  ##Delay
     #print(f'x={x} y={y}')  ##Coord do Person
 
     ##Passagem
@@ -786,7 +786,7 @@ while tela == 6:
 
     ##Outros##
     pygame.display.update()  ##Atualiza a interface
-    pygame.time.delay(50)  ##Delay
+    pygame.time.delay(10)  ##Delay
     #print(f'x={x} y={y}')  ##Coord do Person
     #print(bossdead)
 
