@@ -11,14 +11,15 @@ blue = (3, 74, 236)
 green = (50, 249, 47)
 x = 70
 y = 250
-tela = 0
+tela = 6
 r = 10
 fundo = (0, 0, 0)
 circulo = (255,255,255)
 pa = 1
 bosscont = 0
 pygame.display.set_caption("Forgotten World")
-
+zerou = 0
+gameover = 0
 ##Textos
 textx = 100; texty = 100; ##Cord Text Padrao
 font = pygame.font.SysFont(("Tahoma"), 14, bold=1)
@@ -37,7 +38,7 @@ personright = ['images/direita/direita0.png', 'images/direita/direita1.png', 'im
 persondown = ['images/frente/frente0.png', 'images/frente/frente1.png', 'images/frente/frente2.png', 'images/frente/frente3.png', 'images/frente/frente4.png', 'images/frente/frente5.png', 'images/frente/frente6.png', 'images/frente/frente7.png', 'images/frente/frente8.png']
 personleft = ['images/esquerda/esquerda0.png', 'images/esquerda/esquerda1.png', 'images/esquerda/esquerda2.png', 'images/esquerda/esquerda3.png', 'images/esquerda/esquerda4.png', 'images/esquerda/esquerda5.png', 'images/esquerda/esquerda6.png', 'images/esquerda/esquerda7.png', 'images/esquerda/esquerda8.png']
 personup = ['images/tras/tras0.png', 'images/tras/tras1.png', 'images/tras/tras2.png', 'images/tras/tras3.png', 'images/tras/tras4.png', 'images/tras/tras5.png', 'images/tras/tras6.png', 'images/tras/tras7.png', 'images/tras/tras8.png']
-npc = ["images/npc1.png","images/npc2.png","images/npc3.png","images/npc4.png", "images/npc5.png", "images/capitao.png"]
+npc = ["images/npc1.png","images/npc2.png","images/npc3.png","images/npc4.png", "images/npc5.png", "images/capitao.png", "images/npcblack.png"]
 boss = []
 monster = ["images/skelwarfrente.png", "images/skelwartras.png", "images/skelwardead.png", "images/goblinfrente.png", "images/goblintras.png", "images/goblindead.png", "images/magefrente.png", "images/magecosta.png", "images/magecaido.png"]
 efeitos = ["images/efeito1.png", "images/efeito2.png", "images/efeito3.png"]
@@ -53,6 +54,7 @@ npcsc3 = pygame.image.load(npc[2]).convert_alpha()
 npcsc4 = pygame.image.load(npc[3]).convert_alpha()
 npcsc5 = pygame.image.load(npc[4]).convert_alpha()
 npcsc6 = pygame.image.load(npc[5]).convert_alpha()
+npcsc7 = pygame.image.load(npc[6]).convert_alpha()
 bg = pygame.image.load("bg3icons.png").convert()
 bg2 = pygame.image.load("images/bg2icons.png").convert()
 bg3 = pygame.image.load("images/bg3icons.png").convert()
@@ -385,7 +387,7 @@ while tela == 2:
     area(150, 16, 334, 126)
     area(355, 14, 520, 126)
     #NPCs
-    npc(175, 175, 232, 240, 150, 180, 'Como você chegou a Hades?','Você nunca sairá.')
+    npc(175, 175, 232, 240, 150, 180, 'Como você chegou a Hades?','Saqueadores nunca atacam pela frente.')
     npc(314, 62, 359, 127, 314, 62, 'Para você sair daqui,','Deverá me entregar 3 itens.')
     ##NPC Recebe Itens
     if textx == 314 and 'escudo' in itens and 'mapa' in itens and 'moeda' in itens:
@@ -668,12 +670,39 @@ while tela == 5:
     npc(318, 155, 370, 222, 318, 155, 'Não temos saída.','O mago é muito forte.')
 
     ##Areas
+    if x < 62:
+        x += 1
+    if y > 388:
+        y -= 1
+    if x > 551:
+        x -= 1
+    if y < 44:
+        y += 1
 
+    area(34, 37, 169, 168)
+    area(145, 1, 197, 131)
+    area(230, 144, 263, 185)
+    area(234, 131, 261, 172)
+    area(246, 5, 584, 126)
+    area(433, 76, 535, 185)
+    area(516, 94, 547, 142)
+    area(283, 91, 392, 193)
+    area(471, 361, 578, 429)
+    area(496, 341, 573, 387)
+    area(459, 385, 578, 427)
+    area(255, 274, 320, 337)
+    area(267, 256, 308, 300)
+    area(270, 250, 306, 294)
+    area(56, 305, 133, 375)
+    area(71, 292, 119, 335)
+    area(528, 195, 580, 261)
+    area(533, 186, 581, 239)
+    area(268, 165, 308, 209)
 
     ##Outros##
     pygame.display.update()  ##Atualiza a interface
     pygame.time.delay(10)  ##Delay
-    #print(f'x={x} y={y}')  ##Coord do Person
+    print(f'x={x} y={y}')  ##Coord do Person
 
     ##Passagem
     if 424 > x > 393 and y <= 177:
@@ -715,7 +744,7 @@ def bossrandom():
         return bosslist2
     if bossn == 2:
         return bosslist3
-
+m = 0
 while tela == 6:
     ##Saida ##
     for event in pygame.event.get():
@@ -751,12 +780,14 @@ while tela == 6:
         if 'trofeu' in itens:
             if len(bosslife) != 0:
                 bosslife.pop()
+            zerou = 1
+            tela = 7
 
     ##Chamada de Tela##
     screen.blit(bg5, (0, 0))  ##Background
+    screen.blit(npcsc7, pygame.rect.Rect(386, 218, 0, 0))  ##Npc
     screen.blit(person, pygame.rect.Rect(x, y, 0, 0))  ##Personagem
     screen.blit(mage, pygame.rect.Rect(bosslist[0], bosslist[1], 0, 0))  ##Boss
-
     screen.blit(text, pygame.rect.Rect(textx, texty, 0, 0))  ##Texto NPCS
     screen.blit(text2, pygame.rect.Rect(textx2, texty2, 0, 0))  ##Texto2 NPCS
     screen.blit(textitems, pygame.rect.Rect(31, 10, 0, 0))  ##Texto Itens
@@ -784,10 +815,28 @@ while tela == 6:
         text = font.render('', 1, white)  ##Apaga texto
         text2 = font.render('', 1, white)  ##Apaga texto
 
+    ##Npcs
+    npc(360, 183, 423, 254, 360, 183, 'Não consigo derrotá-lo!', 'Mas o enfraqueci! é sua chance!')
+    ##Area
+    if y < 254:
+        y += 1
+    if x < 130:
+        x += 1
+    if y > 378:
+        y -= 1
+    if x > 479:
+        x -= 1
+    area(129,315, 200,423)
+    area(408, 316, 508,420)
+
     ##Outros##
+    if 'trofeu' in itens and m == 0:
+        pygame.mixer.music.load('songs/Land of fearless.mp3')
+        pygame.mixer.music.play(-1)
+        m = 1
     pygame.display.update()  ##Atualiza a interface
     pygame.time.delay(10)  ##Delay
-    #print(f'x={x} y={y}')  ##Coord do Person
+    print(f'x={x} y={y}')  ##Coord do Person
     #print(bossdead)
 
 if gameover == 1:
@@ -801,6 +850,15 @@ while gameover == 1:
     screen.blit(bg, (0,0)) ##Background
     pygame.display.update() ##Atualiza a interface
     print('gameover!')
+    pygame.time.delay(100)
+while zerou == 1:
+    ##Saida ##
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT: sys.exit()
+    bg = pygame.image.load("images/continua.png").convert()
+    screen.blit(bg, (0,0)) ##Background
+    pygame.display.update() ##Atualiza a interface
+    print('CONTINUA')
     pygame.time.delay(100)
 
 
