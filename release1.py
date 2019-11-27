@@ -11,7 +11,7 @@ blue = (3, 74, 236)
 green = (50, 249, 47)
 x = 70
 y = 250
-tela = 6
+tela = 0
 r = 10
 fundo = (0, 0, 0)
 circulo = (255,255,255)
@@ -402,7 +402,7 @@ while tela == 2:
 
     ##Outros##
     pygame.display.update() ##Atualiza a interface
-    pygame.time.delay(10) ##Delay
+    pygame.time.delay(50) ##Delay
     #print(f'x={x} y={y}')  ##Coord do Person
 
 
@@ -485,7 +485,7 @@ while tela == 3:
     item(446, 243, 508, 296, 'faca', 'Você achou uma faca.')
     ##Outros##
     pygame.display.update() ##Atualiza a interface
-    pygame.time.delay(10) ##Delay
+    pygame.time.delay(50) ##Delay
     #print(f'x={x} y={y}')  ##Coord do Person
 
 if tela == 4:
@@ -546,13 +546,22 @@ while tela == 4:
     if 'chave' in itens:
         item(283, 265, 330, 327, 'moedas', 'Você achou moedas de ouro.')
     else:
-        npc(283, 265, 330, 327, 270, 265, 'Báu trancado.')
+        npc(283, 265, 330, 327, 270, 265, 'Baú trancado.')
     #NPCS
     npc(97, 153, 145, 201, 90, 152, 'Cuidado!', 'Globins selvagens.') ##Placa
     if 'moedas' in itens and textx == 450:
         npc(517, 223, 573, 289, 450, 223, 'Me dá logo isso aqui!', 'Adeus!')
         itens.remove('moedas')
         tela = 5
+    elif 'moedas' in itens:
+        npc(517, 223, 573, 289, 450, 223, '', '')
+        if textx == 450:
+            textx = 50
+            if textx == 50:
+                text = font.render('Me dá logo isso aqui!', 1, white)  ##Apaga texto
+                #text2 = font.render('Adeus!', 1, white)  ##Apaga
+                itens.remove('moedas')
+                tela = 5
     else:
         npc(517, 223, 573, 289, 450, 223, 'HAHA! Jamais sairá daqui!', 'Ao menos que me pague...')
     ##Areas
@@ -594,7 +603,7 @@ while tela == 4:
         y = 386
     ##Outros##
     pygame.display.update() ##Atualiza a interface
-    pygame.time.delay(10) ##Delay
+    pygame.time.delay(50) ##Delay
     #print(f'x={x} y={y}')  ##Coord do Person
 
 
@@ -701,8 +710,8 @@ while tela == 5:
 
     ##Outros##
     pygame.display.update()  ##Atualiza a interface
-    pygame.time.delay(10)  ##Delay
-    print(f'x={x} y={y}')  ##Coord do Person
+    pygame.time.delay(50)  ##Delay
+    #print(f'x={x} y={y}')  ##Coord do Person
 
     ##Passagem
     if 424 > x > 393 and y <= 177:
@@ -835,7 +844,7 @@ while tela == 6:
         pygame.mixer.music.play(-1)
         m = 1
     pygame.display.update()  ##Atualiza a interface
-    pygame.time.delay(10)  ##Delay
+    pygame.time.delay(50)  ##Delay
     print(f'x={x} y={y}')  ##Coord do Person
     #print(bossdead)
 
